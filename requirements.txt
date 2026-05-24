@@ -1,0 +1,33 @@
+# Core image / data processing
+opencv-python>=4.8
+numpy>=1.24
+matplotlib>=3.7
+pandas>=2.0
+pillow>=10.0
+pillow-heif>=0.13
+tqdm>=4.65
+
+# Dataset
+kagglehub>=0.2
+
+# OCR engines
+pytesseract>=0.3.10
+paddlepaddle>=2.6
+paddleocr>=2.7
+
+# OCR metrics
+jiwer>=3.0
+python-Levenshtein>=0.21
+
+# Notebook UI (annotate tools, display widgets)
+ipython>=8.0
+ipywidgets>=8.0
+
+# Notes:
+# - Tesseract engine phải cài thêm bằng installer (không có trên pip):
+#   Windows: https://github.com/UB-Mannheim/tesseract/wiki
+#   Sau khi cài, tải vie.traineddata từ https://github.com/tesseract-ocr/tessdata_best
+#   và copy vào C:\Program Files\Tesseract-OCR\tessdata\
+# - Các notebook 04, 05, 06, 07, 08 có dùng google.colab — chỉ chạy được trên Colab.
+#   Khi chạy local, các cell liên quan đến google.colab cần được thay bằng tương đương
+#   (ví dụ ipywidgets cho UI, đọc file local thay cho files.upload()).
