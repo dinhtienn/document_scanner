@@ -2,7 +2,7 @@
 
 Chủ đề nghiên cứu, thực nghiệm: Xây dựng chương trình xử lý ảnh phục vụ bài toán scan tài liệu trong môn Thị giác máy tính. Nội dung tập trung vào tiền xử lý ảnh, phát hiện biên, tìm contour, hiệu chỉnh phối cảnh, nhị phân hóa / enhancement, và đánh giá chất lượng scan thông qua OCR.
 
-Nội dung báo cáo: Tổng kết quá trình làm việc, nghiên cứu, thực nghiệm và đánh giá các phương pháp xử lý ảnh trong môn Thị giác máy tính. Báo cáo trình bày cách tổ chức chương trình, các bước tiền xử lý dữ liệu ảnh, các kịch bản phát hiện biên, trích xuất vùng tài liệu, các phương pháp nhị phân hóa và giữ màu, đánh giá định lượng (IoU, Dice, Precision, Recall, F1), so sánh OCR (Tesseract vs PaddleOCR) và đánh giá tinh thần, trách nhiệm, thái độ làm việc của các thành viên trong nhóm.
+Nội dung báo cáo: Tổng kết quá trình làm việc, nghiên cứu, thực nghiệm và đánh giá các phương pháp xử lý ảnh trong môn Thị giác máy tính. Báo cáo trình bày cách tổ chức chương trình, các bước tiền xử lý dữ liệu ảnh, các kịch bản phát hiện biên, trích xuất vùng tài liệu, các phương pháp nhị phân hóa và giữ màu, đánh giá định lượng (IoU, Dice), so sánh OCR (Tesseract vs PaddleOCR) và đánh giá tinh thần, trách nhiệm, thái độ làm việc của các thành viên trong nhóm.
 
 ## 1. Thông tin nhóm
 
@@ -30,8 +30,6 @@ Nội dung báo cáo: Tổng kết quá trình làm việc, nghiên cứu, thự
 - Tổng hợp nhận xét, hạn chế và hướng cải thiện cho các phương pháp đã triển khai.
 
 ## 3. Phân công công việc
-
-> _Phần này sẽ được cập nhật sau._
 
 **Đinh Quang Tiến - 23001943**
 - Thực hiện lên kế hoạch, phân chia, điều phối công việc.
