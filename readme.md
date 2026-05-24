@@ -2,7 +2,7 @@
 
 Chủ đề nghiên cứu, thực nghiệm: Xây dựng chương trình xử lý ảnh phục vụ bài toán scan tài liệu trong môn Thị giác máy tính. Nội dung tập trung vào tiền xử lý ảnh, phát hiện biên, tìm contour, hiệu chỉnh phối cảnh, nhị phân hóa / enhancement, và đánh giá chất lượng scan thông qua OCR.
 
-Nội dung báo cáo: Tổng kết quá trình làm việc, nghiên cứu, thực nghiệm và đánh giá các phương pháp xử lý ảnh trong môn Thị giác máy tính. Báo cáo trình bày cách tổ chức chương trình, các bước tiền xử lý dữ liệu ảnh, các kịch bản phát hiện biên, trích xuất vùng tài liệu, các phương pháp nhị phân hóa và giữ màu, đánh giá định lượng (IoU, Dice), so sánh OCR (Tesseract vs PaddleOCR) và đánh giá tinh thần, trách nhiệm, thái độ làm việc của các thành viên trong nhóm.
+Nội dung báo cáo: Tổng kết quá trình làm việc, nghiên cứu, thực nghiệm và đánh giá các phương pháp xử lý ảnh trong môn Thị giác máy tính. Báo cáo trình bày cách tổ chức chương trình, các bước tiền xử lý dữ liệu ảnh, các kịch bản phát hiện biên, trích xuất vùng tài liệu, các phương pháp nhị phân hóa và giữ màu, đánh giá định lượng (IoU, Dice), so sánh OCR (Tesseract vs EasyOCR) và đánh giá tinh thần, trách nhiệm, thái độ làm việc của các thành viên trong nhóm.
 
 ## 1. Thông tin nhóm
 
@@ -24,7 +24,7 @@ Nội dung báo cáo: Tổng kết quá trình làm việc, nghiên cứu, thự
 - Hiệu chỉnh phối cảnh (perspective transform) để tạo ảnh scan.
 - Thực nghiệm nhị phân hóa (Otsu, Adaptive, CLAHE+Otsu) và scan giữ màu (color-preserving).
 - Annotate ground truth 4 góc cho test set, đánh giá định lượng bằng IoU, Dice, Corner Error.
-- Thực nghiệm OCR trên các pipeline khác nhau, so sánh Tesseract và PaddleOCR.
+- Thực nghiệm OCR trên các pipeline khác nhau, so sánh Tesseract và EasyOCR.
 - So sánh, đối chiếu và thảo luận kết quả của các kịch bản thực nghiệm.
 - Sử dụng kết quả thực nghiệm để hoàn thiện báo cáo, slide thuyết trình và mã nguồn chương trình.
 - Tổng hợp nhận xét, hạn chế và hướng cải thiện cho các phương pháp đã triển khai.
@@ -42,7 +42,7 @@ Nội dung báo cáo: Tổng kết quá trình làm việc, nghiên cứu, thự
 **Hà Minh Quang - 23001916**
 - Thu thập và chia dữ liệu.
 - Thực nghiệm phát hiện Contour và quad.
-- Thực nghiệm và đánh giá Paddle OCR.
+- Thực nghiệm và đánh giá EasyOCR.
 - Làm báo cáo và slide.
 
 **Nguyễn Đức Quang - 23001918**
@@ -67,7 +67,7 @@ document_scanner/
     ├── 05_eval_detection.ipynb            # Đánh giá định lượng phát hiện 4 góc
     ├── 06_ocr_annotate.ipynb              # Tool gõ ground truth text cho OCR
     ├── 07_ocr_eval_tesseract.ipynb        # Đánh giá OCR bằng Tesseract
-    └── 08_ocr_eval_paddleocr.ipynb        # Đánh giá OCR bằng PaddleOCR
+    └── 08_ocr_eval_easyocr.ipynb          # Đánh giá OCR bằng EasyOCR
 ```
 
 **Mô tả từng notebook**
@@ -81,7 +81,7 @@ document_scanner/
 | `05_eval_detection.ipynb` | Tính IoU, Dice, Corner Error cho 2 phương pháp phát hiện trên test set. |
 | `06_ocr_annotate.ipynb` | Mini-tool gõ ground truth text (UTF-8) cho subset OCR (~15–20 ảnh). |
 | `07_ocr_eval_tesseract.ipynb` | Chạy Tesseract trên 6 đầu vào (gốc / warped / Otsu / Adaptive / CLAHE / color-preserving), đo CER, WER, Char Acc, Word Acc. |
-| `08_ocr_eval_paddleocr.ipynb` | Chạy PaddleOCR (deep learning baseline) trên cùng subset, so sánh với Tesseract. |
+| `08_ocr_eval_easyocr.ipynb` | Chạy EasyOCR (deep learning baseline, PyTorch backend) trên cùng subset, so sánh với Tesseract. |
 
 **Nguồn dữ liệu và mã nguồn**
 
@@ -111,9 +111,9 @@ document_scanner/
 
 ### Kịch bản 4: Đánh giá OCR (giá trị ứng dụng)
 - **Phương pháp:** chạy OCR trên 6 đầu vào: ảnh gốc / warped grayscale / Otsu / Adaptive / CLAHE+Otsu / Color-preserving.
-- **Engine:** Tesseract 5 và PaddleOCR (deep learning baseline).
+- **Engine:** Tesseract 5 và EasyOCR (deep learning baseline, PyTorch backend).
 - **Dữ liệu:** subset 15–20 ảnh từ test set có chữ rõ, đã gõ ground truth text UTF-8.
-- **Mục tiêu:** chứng minh scan giúp OCR đọc tốt hơn ảnh gốc; xác định pipeline binarize tốt nhất cho OCR; so sánh classical (Tesseract) và deep learning (PaddleOCR).
+- **Mục tiêu:** chứng minh scan giúp OCR đọc tốt hơn ảnh gốc; xác định pipeline binarize tốt nhất cho OCR; so sánh classical (Tesseract) và deep learning (EasyOCR).
 - **Đánh giá:** CER, Character Accuracy, Word Accuracy.
 
 ## 6. Hướng dẫn chạy chương trình
@@ -127,7 +127,7 @@ document_scanner/
 5. `05_eval_detection.ipynb` — đánh giá định lượng pipeline phát hiện.
 6. `06_ocr_annotate.ipynb` — gõ ground truth text cho subset OCR (chỉ cần chạy 1 lần).
 7. `07_ocr_eval_tesseract.ipynb` — đánh giá OCR Tesseract.
-8. `08_ocr_eval_paddleocr.ipynb` — đánh giá OCR PaddleOCR và so sánh.
+8. `08_ocr_eval_easyocr.ipynb` — đánh giá OCR EasyOCR và so sánh.
 
 Notebook 04 và 06 sinh annotation thủ công, kết quả đã được commit nên các bước đánh giá (05, 07, 08) có thể chạy trực tiếp mà không cần annotate lại.
 
@@ -177,6 +177,6 @@ Dataset được tự động tải qua `kagglehub` trong notebook 01. Nếu mu�
 - Adaptive Threshold cho OCR tốt nhất ở ảnh có bóng đổ; Otsu thắng ở điều kiện ánh sáng đều.
 - Color-preserving không cải thiện OCR text thuần nhưng giữ được logo, hình minh họa cho người đọc.
 - Scan giảm CER trung bình ~30–50% so với OCR trên ảnh gốc.
-- PaddleOCR cho kết quả tốt hơn Tesseract trên ảnh khó (chữ tay).
+
 
 Số liệu chi tiết, bảng so sánh và phân tích fail case có trong báo cáo + slide.
